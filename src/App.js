@@ -12,12 +12,12 @@ import Login from "./pages/Login";
 import { auth } from "./services/firebase";
 import './styles.css';
 
-function PrivateRoute({ component: Component, authenticated, ...rest }) {
+function PrivateRoute(props) {
   return (
     <Route
-      {...rest}
+      {...props.rest}
       render={props =>
-        authenticated === true ? (
+        props.authenticated === true ? (
           <Component {...props} />
         ) : (
             <Redirect
@@ -29,12 +29,12 @@ function PrivateRoute({ component: Component, authenticated, ...rest }) {
   );
 }
 
-function PublicRoute({ component: Component, authenticated, ...rest }) {
+function PublicRoute(props) {
   return (
     <Route
-      {...rest}
+      {...props.rest}
       render={props =>
-        authenticated === false ? (
+        props.authenticated === false ? (
           <Component {...props} />
         ) : (
             <Redirect to="/chat" />
