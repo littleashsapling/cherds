@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { signin, signInGoogle } from "../helpers/auth";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { signin, signInGoogle } from '../helpers/auth';
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
             error: null,
-            email: "",
-            password: ""
+            email: '',
+            password: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +23,7 @@ export default class Login extends Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-        this.setState({ error: "" });
+        this.setState({ error: '' });
         try {
             await signin(this.state.email, this.state.password);
         } catch (error) {
@@ -43,46 +43,46 @@ export default class Login extends Component {
         return (
             <div>
                 <form
-                    autoComplete="off"
+                    autoComplete='off'
                     onSubmit={this.handleSubmit}
                 >
                     <h1>
-                        Login to<Link to="/"> Cherds</Link>
+                        Login to<Link to='/'> Cherds</Link>
                     </h1>
                     <p>
                         Fill in the form below to login to your account.
           </p>
                     <div>
                         <input
-                            placeholder="Email"
-                            name="email"
-                            type="email"
+                            placeholder='Email'
+                            name='email'
+                            type='email'
                             onChange={this.handleChange}
                             value={this.state.email}
                         />
                     </div>
                     <div>
                         <input
-                            placeholder="Password"
-                            name="password"
+                            placeholder='Password'
+                            name='password'
                             onChange={this.handleChange}
                             value={this.state.password}
-                            type="password"
+                            type='password'
                         />
                     </div>
                     <div>
                         {this.state.error ? (
                             <p>{this.state.error}</p>
                         ) : null}
-                        <button type="submit">Login</button>
+                        <button type='submit'>Login</button>
                     </div>
                     <p>You can also log in with Google!</p>
-                    <button className="btn btn-danger mr-2" type="button" onClick={this.googleSignIn}>
+                    <button className='btn btn-danger mr-2' type='button' onClick={this.googleSignIn}>
                         Sign in with Google
                     </button>
                     <hr />
                     <p>
-                        Don't have an account? <Link to="/signup">Sign up</Link>
+                        Don't have an account? <Link to='/signup'>Sign up</Link>
                     </p>
                 </form>
             </div>

@@ -1,15 +1,15 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Route,
   BrowserRouter as Router,
   Switch,
   Redirect
-} from "react-router-dom";
-import Home from "./pages/Home";
-import Chat from "./pages/Chat";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import { auth } from "./services/firebase";
+} from 'react-router-dom';
+import Home from './pages/Home';
+import Chat from './pages/Chat';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import { auth } from './services/firebase';
 import './styles.css';
 
 function PrivateRoute(props) {
@@ -21,7 +21,7 @@ function PrivateRoute(props) {
           <Component {...props} />
         ) : (
             <Redirect
-              to={{ pathname: "/login", state: { from: props.location } }}
+              to={{ pathname: '/login', state: { from: props.location } }}
             />
           )
       }
@@ -37,7 +37,7 @@ function PublicRoute(props) {
         props.authenticated === false ? (
           <Component {...props} />
         ) : (
-            <Redirect to="/chat" />
+            <Redirect to='/chat' />
           )
       }
     />
@@ -71,25 +71,25 @@ class App extends Component {
 
   render() {
     return this.state.loading === true ? (
-      <div className="spinner-border text-success" role="status">
-        <span className="sr-only">Loading...</span>
+      <div className='spinner-border text-success' role='status'>
+        <span className='sr-only'>Loading...</span>
       </div>
     ) : (
         <Router>
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path='/' component={Home} />
             <PrivateRoute
-              path="/chat"
+              path='/chat'
               authenticated={this.state.authenticated}
               component={Chat}
             />
             <PublicRoute
-              path="/signup"
+              path='/signup'
               authenticated={this.state.authenticated}
               component={Signup}
             />
             <PublicRoute
-              path="/login"
+              path='/login'
               authenticated={this.state.authenticated}
               component={Login}
             />

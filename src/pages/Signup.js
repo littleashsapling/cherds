@@ -44,24 +44,24 @@ export default class SignUp extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <h2> Sign Up to<Link to="/">Cherds</Link></h2>
+                    <h2> Sign Up to<Link to='/'>Cherds</Link></h2>
                     <p>Fill in the form below to create an account.</p>
                     <div>
-                        <input placeholder="Email" name="email" type="email" onChange={this.handleChange} value={this.state.email}></input>
+                        <input placeholder='Email' name='email' type='email' onChange={this.handleChange} value={this.state.email}></input>
                     </div>
                     <div>
-                        <input placeholder="Password" name="password" onChange={this.handleChange} value={this.state.password} type="password"></input>
+                        <input placeholder='Password' name='password' onChange={this.handleChange} value={this.state.password} type='password'></input>
                     </div>
                     <div>
                         {this.state.error ? <p>{this.state.error}</p> : null}
-                        <button type="submit">Sign up</button>
+                        <button type='submit'>Sign up</button>
                     </div>
                     <p> You Can also sign up with Google!</p>
                     <p>Or</p>
-                    <button onClick={this.googleSignIn} type="button">
+                    <button onClick={this.googleSignIn} type='button'>
                         Sign up with Google</button>
                     <hr></hr>
-                    <p>Already have an account? <Link to="/login">Login</Link></p>
+                    <p>Already have an account? <Link to='/login'>Login</Link></p>
                 </form>
             </div>
         )
