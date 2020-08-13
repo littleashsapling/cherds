@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { signup, signInGoogle } from '../helpers/auth';
 
-class SignUp extends Component {
+export default class SignUp extends Component {
 
     constructor(props) {
         super(props);
@@ -67,5 +67,3 @@ class SignUp extends Component {
         )
     }
 }
-
-export default SignUp;

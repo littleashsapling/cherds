@@ -34,10 +34,7 @@ const PublicRoute = (Component, rest) => {
     <Route
       {...rest}
       render={props => (
-        !props.authenticated ?
-          <Component {...props} />
-          :
-          <Redirect to='/chat' />
+        <Component {...props} />
       )
       }
     />
