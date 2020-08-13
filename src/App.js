@@ -12,12 +12,12 @@ import Login from './pages/Login';
 import { auth } from './services/firebase';
 import './styles.css';
 
-function PrivateRoute(props) {
+const PrivateRoute = (Component, ...rest) => {
   return (
     <Route
-      {...props.rest}
+      {...rest}
       render={props =>
-        props.authenticated === true ? (
+        props.authenticated ? (
           <Component {...props} />
         ) : (
             <Redirect
@@ -29,16 +29,16 @@ function PrivateRoute(props) {
   );
 }
 
-function PublicRoute(props) {
+const PublicRoute = (Component, rest) => {
   return (
     <Route
-      {...props.rest}
-      render={props =>
-        props.authenticated === false ? (
+      {...rest}
+      render={props => (
+        !props.authenticated ?
           <Component {...props} />
-        ) : (
-            <Redirect to='/chat' />
-          )
+          :
+          <Redirect to='/chat' />
+      )
       }
     />
   );
@@ -92,6 +92,7 @@ class App extends Component {
               path='/login'
               authenticated={this.state.authenticated}
               component={Login}
+              exact
             />
           </Switch>
         </Router>

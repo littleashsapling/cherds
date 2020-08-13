@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { signin, signInGoogle } from '../helpers/auth';
 
-export default class Login extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -89,3 +89,5 @@ export default class Login extends Component {
         );
     }
 }
+
+export default Login;
