@@ -17,7 +17,7 @@ h1 {
     overflow-y: scroll;
 }
 
-.chatarea {
+.chatarea .chatbubble {
     background-color: #d6d3b4;
     padding: 20px;
     border-radius: 4px;
@@ -25,48 +25,21 @@ h1 {
     word-wrap: break-word;
 }
 
-.chatarea {
-    margin-left: auto;
-    background-color: #f0e1a4;
-}
-
-.chatlist {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
-.chatlist li {
-    padding: 5px 0;
-}
-
-.chatlist em {
+.chatbubble .chattime {
     font-size: 12px;
-    font-style: normal;
+    color: #757575;
+    text-align: right;
 }
 
-.chatlist strong {
-    display: inline-block;
-    margin: 0 5px 0 10px;
+.chatarea .chatbubble.currentuser {
+    margin-left: auto;
+    background-color: #a5d6a7;
 }
 
-.sendchat {
-    margin-top: 15px;
+.formcontrol {
+    width: 60%;
 }
 
-.sendchat input {
-    border: 1px solid #ccc;
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    outline: none;
-}
-
-.sendchat input:focus {
-    border: 1px solid black;
-}
-
-.disallowchat {
-    text-align: center;
+.formcontrol:focus {
+    box-shadow: none;
 }

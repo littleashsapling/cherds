@@ -1,10 +1,8 @@
-import {
-    db
-} from '../services/firebase';
+import firebase from '../services/firebase';
 
 export function readChat() {
     let abc = [];
-    db.ref('chat').on('value', snapshot => {
+    firebase.database().ref('chat').on('value', snapshot => {
         snapshot.forEach(snap => {
             abc.push(snap.val())
         });
@@ -13,7 +11,7 @@ export function readChat() {
 }
 
 export function writeMessage(message) {
-    return db.ref('chat').push({
+    return firebase.database().ref('chat').push({
         content: message.content,
         timestamp: message.timestamp,
         uid: message.uid
