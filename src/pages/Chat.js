@@ -1,98 +1,49 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
-import { auth } from '../services/firebase';
-import { db } from '../services/firebase';
+import firebase from '../services/firebase';
+import Chatbox from '../components/chatbox';
 
 class Chat extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: auth().currentUser,
-            chat: [],
-            content: '',
-            readError: null,
-            writeError: null,
-            loadingChats: false
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.myRef = React.createRef();
-    }
-
-    async componentDidMount() {
-        this.setState({ readError: null, loadingChats: true });
-        const chatArea = this.myRef.current;
-        try {
-            db.ref('chat').on('value', snapshot => {
-                let chat = [];
-                snapshot.forEach((snap) => {
-                    chat.push(snap.val());
-                });
-                chat.sort(function (a, b) { return a.timestamp - b.timestamp })
-                this.setState({ chat });
-                chatArea.scrollBy(0, chatArea.scrollHeight);
-                this.setState({ loadingChats: false });
-            });
-        } catch (error) {
-            this.setState({ readError: error.message, loadingChats: false });
+            message: '',
         }
     }
 
-    handleChange(event) {
-        this.setState({
-            content: event.target.value
-        });
+    handleChange = e => {
+        this.setState({ [e.target.name]: e.target.value });
     }
 
-    async handleSubmit(event) {
-        event.preventDefault();
-        this.setState({ writeError: null });
-        const chatArea = this.myRef.current;
-        try {
-            await db.ref('chat').push({
-                content: this.state.content,
-                timestamp: Date.now(),
-                uid: this.state.user.uid
-            });
-            this.setState({ content: '' });
-            chatArea.scrollBy(0, chatArea.scrollHeight);
-        } catch (error) {
-            this.setState({ writeError: error.message });
+    handleSubmit = e => {
+        e.preventDefault();
+        if (this.state.message !== '') {
+            const chatRef = firebase.database().ref('generalchat');
+            const chat = {
+                message: this.state.message,
+                user: this.props.user.displayName,
+                timestamp: new Date().getTime()
+            }
+
+            chatRef.push(chat);
+            this.setState({ message: '' });
         }
-    }
-
-    formatTime(timestamp) {
-        const d = new Date(timestamp);
-        const time = `${d.getDate()}/${(d.getMonth() + 1)}/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
-        return time;
     }
 
     render() {
         return (
             <div>
                 <Header />
-
-                <div className='chatarea' ref={this.myRef}>
-                    {/* loading indicator */}
-                    {this.state.loadingChat ? <div className='spinner-border text-success' role='status'>
-                        <span className='sr-only'>Loading...</span>
-                    </div> : ''}
-                    {/* chat area */}
-                    {this.state.chat.map(chat => {
-                        return <p key={chat.timestamp} className={'chat-bubble ' + (this.state.user.uid === chat.uid ? 'current-user' : '')}>
-                            {chat.content}
-                            <br />
-                            <span className='chat-time float-right'>{this.formatTime(chat.timestamp)}</span>
-                        </p>
-                    })}
-                </div>
-                <form onSubmit={this.handleSubmit} className='mx-3'>
-                    <textarea className='form-control' name='content' onChange={this.handleChange} value={this.state.content}></textarea>
-                    {this.state.error ? <p className='text-danger'>{this.state.error}</p> : null}
-                    <button type='submit' className='btn btn-submit px-5 mt-4'>Send</button>
-                </form>
-                <div className='py-5 mx-3'>
-                    Login in as: <strong className='text-info'>{this.state.user.email}</strong>
+                <h1>Cherds Room</h1>
+                <div className="chatarea">
+                    <h1>Welcome to the chat!</h1>
+                    <div>
+                        <form className="sendchat" onSubmit={this.handleSubmit}>
+                            <input type="text" name="message" id="message" value={this.state.message} onChange={this.handleChange} placeholder='Leave a message...' />
+                            <input type="submit" value="submit" />
+                        </form>
+                        <Chatbox />
+                    </div>
                 </div>
             </div>
         );

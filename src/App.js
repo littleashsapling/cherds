@@ -12,7 +12,7 @@ import Login from './pages/Login';
 import { auth } from './services/firebase';
 import './styles.css';
 
-const PrivateRoute = (Component, ...rest) => {
+/*const PrivateRoute = (Component, ...rest) => {
   return (
     <Route
       {...rest}
@@ -27,15 +27,47 @@ const PrivateRoute = (Component, ...rest) => {
       }
     />
   );
-}
+}*/
 
-const PublicRoute = (Component, rest) => {
+/*const PublicRoute = (Component, rest) => {
   return (
     <Route
       {...rest}
       render={props => (
         <Component {...props} />
       )
+      }
+    />
+  );
+}*/
+
+function PrivateRoute({ component: Component, authenticated, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        authenticated ? (
+          <Component {...props} />
+        ) : (
+            <Redirect
+              to={{ pathname: "/login", state: { from: props.location } }}
+            />
+          )
+      }
+    />
+  );
+}
+
+function PublicRoute({ component: Component, authenticated, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        !authenticated ? (
+          <Component {...props} />
+        ) : (
+            <Redirect to="/chat" />
+          )
       }
     />
   );
@@ -67,7 +99,7 @@ class App extends Component {
   }
 
   render() {
-    return this.state.loading === true ? (
+    return this.state.loading ? (
       <div className='spinner-border text-success' role='status'>
         <span className='sr-only'>Loading...</span>
       </div>
