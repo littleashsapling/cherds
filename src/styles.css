@@ -1,5 +1,7 @@
 body {
     background-color: #b89e7d;
+    color: #171008;
+    text-align: center;
 }
 
 .chatarea,
@@ -7,7 +9,7 @@ body {
     margin-top: 60px;
 }
 
-h1 {
+h2 {
     margin-top: 6rem;
 }
 
@@ -33,7 +35,7 @@ h1 {
 
 .chatarea .chatbubble.currentuser {
     margin-left: auto;
-    background-color: #a5d6a7;
+    background-color: #ddc79e;
 }
 
 .formcontrol {
@@ -42,4 +44,47 @@ h1 {
 
 .formcontrol:focus {
     box-shadow: none;
+}
+
+
+/*home and nav*/
+
+.jumbotron {
+    background-color: #BFA78A;
+}
+
+.navbar {
+    background-color: #eaa958 !important;
+}
+
+strong.text-info {
+    color: #ffc060 !important;
+}
+
+
+/*forms*/
+
+input[type=password],
+input[type=email] {
+    margin: 5px;
+    border: 1px transparent;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+button {
+    margin: 5px;
+}
+
+a {
+    color: #ffc060;
+}
+
+form {
+    background-color: #BFA78A;
+    padding: 10px;
+}
+
+p {
+    margin: 5px;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import firebase, { auth } from '../services/firebase';
 
 export default class Chat extends Component {
@@ -70,7 +71,7 @@ export default class Chat extends Component {
         return (
             <div>
                 <Header />
-
+                <h2>Cherds Chat</h2>
                 <div className='chatarea' ref={this.myRef}>
                     {/* loading indicator */}
                     {this.state.loadingChats ? <div className='spinner-border text-success' role='status'>
@@ -85,14 +86,19 @@ export default class Chat extends Component {
                         </p>
                     })}
                 </div>
-                <form onSubmit={this.handleSubmit} className='mx-3'>
-                    <textarea className='formcontrol' name='content' onChange={this.handleChange} value={this.state.content}></textarea>
-                    {this.state.error ? <p className='text-danger'>{this.state.error}</p> : null}
-                    <button type='submit' className='btn btn-submit px-5 mt-4'>Send</button>
+                <form onSubmit={this.handleSubmit} className=''>
+                    <div>
+                        <textarea className='formcontrol' name='content' onChange={this.handleChange} value={this.state.content}></textarea>
+                        {this.state.error ? <p className='text-danger'>{this.state.error}</p> : null}
+                    </div>
+                    <div>
+                        <button type='submit' className='btn btn-warning'>Send</button>
+                    </div>
                 </form>
                 <div className='py-5 mx-3'>
                     Login in as: <strong className='text-info'>{this.state.user.email}</strong>
                 </div>
+                <Footer></Footer>
             </div>
         );
     }

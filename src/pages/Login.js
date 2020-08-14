@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { signin, signInGoogle } from '../helpers/auth';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default class Login extends Component {
     constructor(props) {
@@ -42,49 +44,52 @@ export default class Login extends Component {
     render() {
         return (
             <div>
-                <form
-                    autoComplete='off'
-                    onSubmit={this.handleSubmit}
-                >
-                    <h1>
-                        Login to<Link to='/'> Cherds</Link>
-                    </h1>
-                    <p>
-                        Fill in the form below to login to your account.
+                <Header></Header>
+                <div>
+                    <form
+                        autoComplete='off'
+                        onSubmit={this.handleSubmit}
+                    >
+                        <h2>
+                            Login to<Link to='/'> Cherds</Link>
+                        </h2>
+                        <p>
+                            Fill in the form below to login to your account.
           </p>
-                    <div>
-                        <input
-                            placeholder='Email'
-                            name='email'
-                            type='email'
-                            onChange={this.handleChange}
-                            value={this.state.email}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            placeholder='Password'
-                            name='password'
-                            onChange={this.handleChange}
-                            value={this.state.password}
-                            type='password'
-                        />
-                    </div>
-                    <div>
-                        {this.state.error ? (
-                            <p>{this.state.error}</p>
-                        ) : null}
-                        <button type='submit'>Login</button>
-                    </div>
-                    <p>You can also log in with Google!</p>
-                    <button className='btn btn-danger mr-2' type='button' onClick={this.googleSignIn}>
-                        Sign in with Google
+                        <div>
+                            <input
+                                placeholder='Email'
+                                name='email'
+                                type='email'
+                                onChange={this.handleChange}
+                                value={this.state.email}
+                            />
+                        </div>
+                        <div>
+                            <input
+                                placeholder='Password'
+                                name='password'
+                                onChange={this.handleChange}
+                                value={this.state.password}
+                                type='password'
+                            />
+                        </div>
+                        <div>
+                            {this.state.error ? (
+                                <p>{this.state.error}</p>
+                            ) : null}
+                            <button type='submit' className='btn btn-warning'>Login</button>
+                        </div>
+                        <button className='btn btn-warning' type='button' onClick={this.googleSignIn}>
+                            Sign in with Google
                     </button>
-                    <hr />
-                    <p>
-                        Don't have an account? <Link to='/signup'>Sign up</Link>
-                    </p>
-                </form>
+                        <hr />
+                        <p>
+                            Don't have an account? <Link to='/signup'>Sign up</Link>
+                        </p>
+                    </form>
+                </div>
+                <Footer></Footer>
             </div>
         );
     }
