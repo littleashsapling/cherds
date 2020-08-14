@@ -1,5 +1,5 @@
 import React from 'react';
-import { db } from '../services/firebase';
+import firebase from '../services/firebase.js'
 
 class Chatbox extends React.Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class Chatbox extends React.Component {
     }
 
     componentDidMount() {
-        const chatRef = db.database().ref('generalchat');
+        const chatRef = firebase.database().ref('generalchat');
         chatRef.on('value', snapshot => {
             const getChat = snapshot.val();
             let ascChats = [];

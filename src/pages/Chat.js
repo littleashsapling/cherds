@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
-import { db } from '../services/firebase';
+import firebase from '../services/firebase';
 import Chatbox from '../components/chatbox';
 
 class Chat extends Component {
@@ -18,7 +18,7 @@ class Chat extends Component {
     handleSubmit = e => {
         e.preventDefault();
         if (this.state.message !== '') {
-            const chatRef = db.database().ref('generalchat');
+            const chatRef = firebase.database().ref('generalchat');
             const chat = {
                 message: this.state.message,
                 user: this.props.user.displayName,
@@ -37,14 +37,12 @@ class Chat extends Component {
                 <h1>Cherds Room</h1>
                 <div className="chatarea">
                     <h1>Welcome to the chat!</h1>
-                    <div className="allowchat">
+                    <div>
                         <form className="sendchat" onSubmit={this.handleSubmit}>
                             <input type="text" name="message" id="message" value={this.state.message} onChange={this.handleChange} placeholder='Leave a message...' />
+                            <input type="submit" value="submit" />
                         </form>
                         <Chatbox />
-                    </div>
-                    <div className="py-5 mx-3">
-                        Login in as: <strong className="text-info">{this.state.user.email}</strong>
                     </div>
                 </div>
             </div>
